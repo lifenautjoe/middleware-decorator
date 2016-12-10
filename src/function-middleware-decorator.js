@@ -1,4 +1,4 @@
-class OutputMiddleware {
+class FunctionMiddleware {
 
     constructor(f) {
         this._middlewares = [];
@@ -6,18 +6,14 @@ class OutputMiddleware {
     }
 
     _digest(middlewares, fOutput) {
-        if (middlewares.length === 0) return args;
-        const nextMiddleware = this._middlewares.shift();
+        if (middlewares.length === 0) return fOutput;
+        const nextMiddleware = middlewares.shift();
         const nextMiddlewareResult = nextMiddleware(fOutput);
         return this._digest(middlewares, nextMiddlewareResult);
     }
 
-    remove(middleware) {
-        const index = this._middlewares.indexOf(middleware);
-        if (index > -1) this._middlewares.splice(index, 1);
-    }
-
-    add(middleware) {
+    use(middleware) {
+        if (typeof middleware !== "function") throw new Error('middleware:function is required');
         this._middlewares.push(middleware);
     }
 
@@ -33,22 +29,18 @@ class OutputMiddleware {
  * @param {Function} f
  * @returns {Function}
  */
-function outputMiddlewareDecorator(f) {
-    const middleware = new OutputMiddleware(f);
-
+function functionMiddlewareDecorator(f) {
     function decoratedF() {
-        return middleware.run(...arguments);
+        return decoratedF._middleware.run(...arguments);
     }
 
-    decoratedF.add = function (middleware) {
-        this.middleware.add(middleware)
-    };
+    decoratedF._middleware = new FunctionMiddleware(f);
 
-    decoratedF.remove = function (middleware) {
-        this.middleware.remove(middleware)
+    decoratedF.use = function (middleware) {
+        decoratedF._middleware.use(middleware)
     };
 
     return decoratedF;
 }
 
-export default outputMiddlewareDecorator;
+export default functionMiddlewareDecorator;
