@@ -5,11 +5,11 @@ class FunctionMiddleware {
         this._f = f;
     }
 
-    _digest(middlewares, fOutput) {
-        if (middlewares.length === 0) return fOutput;
+    _digest(middlewares, input) {
+        if (middlewares.length === 0) return input;
         const nextMiddleware = middlewares.shift();
-        const nextMiddlewareResult = nextMiddleware(fOutput);
-        return this._digest(middlewares, nextMiddlewareResult);
+        const nextMiddlewareOutput = nextMiddleware(input);
+        return this._digest(middlewares, nextMiddlewareOutput);
     }
 
     use(middleware) {
@@ -17,7 +17,7 @@ class FunctionMiddleware {
         this._middlewares.push(middleware);
     }
 
-    run(middlewares, ...args) {
+    run(...args) {
         const fOutput = this._f(...arguments);
         if (this._middlewares.length === 0) return fOutput;
         return this._digest(this._middlewares.slice(), fOutput)
@@ -25,9 +25,19 @@ class FunctionMiddleware {
 }
 
 /**
+ * @typedef {Function} functionMiddleware~use
+ * @param {Function} middleware
+ */
+
+/**
+ * @typedef {Function} functionMiddleware
+ * @property {functionMiddleware~use} use
+ */
+
+/**
  * Decorates the given function with middleware functionality
  * @param {Function} f
- * @returns {Function}
+ * @returns {functionMiddleware}
  */
 function functionMiddlewareDecorator(f) {
     function decoratedF() {
