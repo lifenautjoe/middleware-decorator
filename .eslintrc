@@ -5,7 +5,7 @@
   },
   "rules": {
     "indent": [
-      "error",
+      2,
       4
     ]
   },
