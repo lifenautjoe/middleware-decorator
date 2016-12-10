@@ -65,6 +65,7 @@ describe('functionMiddlewareDecorator', () => {
     });
 
     describe('()', () => {
+
         describe('when no middlewares have been added', () => {
             it('should return the original function output', () => {
                 expect(decoratedFunction()).to.equal(originalOutput);
