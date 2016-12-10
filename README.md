@@ -1,4 +1,4 @@
-# middleware-decorator
+# function-middleware-decorator
 
 Decorates functions with middleware functionality
 
