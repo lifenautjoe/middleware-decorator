@@ -8,19 +8,7 @@ Decorates functions with middleware functionality
 [![Dependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator)
 [![devDependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator#info=devDependencies)
 
-## Installation
-
-### npm
-```sh
-    npm install function-middleware-decorator
-```
-
-### bower
-```sh
-    bower install function-middleware-decorator
-```
-
-## Usage
+## Demo
 
 Given that the module has been imported with your favorite loader as `functionMiddlewareDecorator`
 
@@ -37,9 +25,20 @@ function halfPriceMiddleware(price){
 
 getPrice.use(halfPriceMiddleware);
 
-// totalPrice = 5
-const price = getPrice();
+getPrice(); // 5
 
+```
+
+## Installation
+
+### npm
+```sh
+    npm install function-middleware-decorator
+```
+
+### bower
+```sh
+    bower install function-middleware-decorator
 ```
 
 ## Contributing
