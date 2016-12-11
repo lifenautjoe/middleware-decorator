@@ -1,4 +1,4 @@
-class FunctionMiddleware {
+export default class FunctionMiddleware {
 
     constructor(f) {
         this._middlewares = [];
@@ -23,34 +23,3 @@ class FunctionMiddleware {
         return this._digest(this._middlewares.slice(), fOutput)
     }
 }
-
-/**
- * @typedef {Function} functionMiddleware~use
- * @param {Function} middleware
- */
-
-/**
- * @typedef {Function} functionMiddleware
- * @property {functionMiddleware~use} use
- */
-
-/**
- * Decorates the given function with middleware functionality
- * @param {Function} f
- * @returns {functionMiddleware}
- */
-function functionMiddlewareDecorator(f) {
-    function decoratedF() {
-        return decoratedF._middleware.run(...arguments);
-    }
-
-    decoratedF._middleware = new FunctionMiddleware(f);
-
-    decoratedF.use = function (middleware) {
-        decoratedF._middleware.use(middleware)
-    };
-
-    return decoratedF;
-}
-
-module.exports = functionMiddlewareDecorator;
