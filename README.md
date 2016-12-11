@@ -57,7 +57,7 @@ decoratedFunction = functionMiddlewareDecorator(originalFunction);
 Adds a middleware to the decorated function
 
 ```js
-decoratedFunction.use(function(originalFunctionOutput){
+decoratedFunction.use((originalFunctionOutput) => {
     console.log(`I'm a middleware!`);
     return originalFunctionOutput;
 });

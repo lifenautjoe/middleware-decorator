@@ -13,7 +13,7 @@ describe('functionMiddlewareDecorator', () => {
         originalOutput = {
             count: middlewaresTestCount
         };
-        originalFunction = spy(function () {
+        originalFunction = spy(() => {
             return originalOutput
         });
 
@@ -29,7 +29,7 @@ describe('functionMiddlewareDecorator', () => {
         });
 
         describe('when no middleware is passed', () => {
-            it('should throw an error', function () {
+            it('should throw an error', () => {
                 expect(() => {
                     decoratedFunction.use();
                 }).to.throw(badMiddlwareErrorMessage);
@@ -43,7 +43,7 @@ describe('functionMiddlewareDecorator', () => {
                     1, 'what', false, null
                 ];
 
-                it('should throw an error', function () {
+                it('should throw an error', () => {
                     invalidMiddlewares.forEach((badMiddleware) => {
                         expect(() => {
                             decoratedFunction.use(badMiddleware);
