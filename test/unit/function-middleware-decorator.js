@@ -6,15 +6,16 @@ describe('functionMiddlewareDecorator', () => {
 
     const middlewaresTestCount = 10;
     let originalOutput;
+    let originalFunction;
     let decoratedFunction;
 
     beforeEach(() => {
         originalOutput = {
             count: middlewaresTestCount
         };
-        function originalFunction() {
+        originalFunction = spy(function () {
             return originalOutput
-        }
+        });
 
         decoratedFunction = functionMiddlewareDecorator(originalFunction);
     });
@@ -65,6 +66,13 @@ describe('functionMiddlewareDecorator', () => {
     });
 
     describe('()', () => {
+
+        it('should forward all arguments to the original function', () => {
+            const args = [123, 'string', false, null];
+            decoratedFunction(...args);
+            expect(originalFunction.calledOnce).to.be.true;
+            expect(originalFunction.calledWith(...args)).to.be.true;
+        });
 
         describe('when no middlewares have been added', () => {
             it('should return the original function output', () => {
