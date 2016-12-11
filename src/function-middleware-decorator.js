@@ -53,4 +53,4 @@ function functionMiddlewareDecorator(f) {
     return decoratedF;
 }
 
-export default functionMiddlewareDecorator;
+module.exports = functionMiddlewareDecorator;
