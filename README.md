@@ -68,7 +68,7 @@ decoratedFunction.use(function(originalFunctionOutput){
 Calls the original function with the given arguments and runs it's output through the registered middleware
 
 ```js
-decorateFunction(arg1, arg2);
+decoratedFunction(arg1, arg2);
 ```
 
 ## Contributing
