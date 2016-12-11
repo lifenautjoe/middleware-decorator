@@ -41,6 +41,36 @@ getPrice(); // 5
     bower install function-middleware-decorator
 ```
 
+
+## API
+
+### (originalFunction: Function) : Function
+
+Takes a function as argument and returns it's decorated version
+
+```js
+decoratedFunction = functionMiddlewareDecorator(originalFunction);
+```
+
+### decoratedFunction.use(middleware: Function)
+
+Adds a middleware to the decorated function
+
+```js
+decoratedFunction.use(function(originalFunctionOutput){
+    console.log(`I'm a middleware!`);
+    return originalFunctionOutput;
+});
+```
+
+### decoratedFunction(...args);
+
+Calls the original function with the given arguments and runs it's output through the registered middleware
+
+```js
+decorateFunction(arg1, arg2);
+```
+
 ## Contributing
 
 #### Clone the repository
