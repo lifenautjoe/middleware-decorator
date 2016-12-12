@@ -10,11 +10,13 @@ export default class AsyncFunctionMiddleware extends FunctionMiddleware {
         if (middlewares.length === 0) return onDigested(undefined, input);
         const nextMiddleware = middlewares.shift();
 
+        const that = this;
+
         function next(nextMiddlewareOutput) {
             if (nextMiddlewareOutput instanceof Error) {
                 onDigested(nextMiddlewareOutput);
             } else {
-                this._digest(middlewares, nextMiddlewareOutput, onDigested);
+                that._digest(middlewares, nextMiddlewareOutput, onDigested);
             }
         }
 
@@ -23,16 +25,15 @@ export default class AsyncFunctionMiddleware extends FunctionMiddleware {
 
     run(...args) {
         const fOutput = this._runFWithArgs(...args);
-        if (this._middlewares.length === 0) return fOutput;
         let digestionOutput;
         let cb;
 
         function runCb() {
-            if (digestionOutput && cb) cb(digestionOutput);
+            if (digestionOutput && cb) cb(...digestionOutput);
         }
 
-        function onDigested(_digestionOutput) {
-            digestionOutput = _digestionOutput;
+        function onDigested(...output) {
+            digestionOutput = output;
             runCb();
         }
 
