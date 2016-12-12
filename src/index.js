@@ -17,29 +17,35 @@ import PromisedFunctionMiddleware from './promised-function-middleware';
  * @property {functionMiddleware~use} use
  */
 
+
 /**
- * Decorates the given function with middleware functionality
- * @param {Function} f
- * @returns {functionMiddleware}
+ * Generates function middleware decorators with the given middleware
+ * @param {Function} middleware
+ * @returns {functionMiddlewareDecorator}
  */
-function functionMiddlewareDecorator(f) {
-    function decoratedF() {
-        return decoratedF._middleware.run(...arguments);
+function functionMiddlewareDecoratorFactory(middleware) {
+    /**
+     * Decorates the given function with middleware functionality
+     * @param {Function} f
+     * @returns {functionMiddleware}
+     */
+    return function functionMiddlewareDecorator(f) {
+        function decoratedF() {
+            return decoratedF._middleware.run(...arguments);
+        }
+
+        decoratedF._middleware = new middleware(f);
+
+        decoratedF.use = function (middleware) {
+            decoratedF._middleware.use(middleware)
+        };
+
+        return decoratedF;
     }
-
-    decoratedF._middleware = new FunctionMiddleware(f);
-
-    decoratedF.use = function (middleware) {
-        decoratedF._middleware.use(middleware)
-    };
-
-    return decoratedF;
 }
 
-function asyncFunctionMiddlewareDecorator() {
-
-}
-
-functionMiddlewareDecorator.async = asyncFunctionMiddlewareDecorator;
+const functionMiddlewareDecorator = functionMiddlewareDecoratorFactory(FunctionMiddleware);
+functionMiddlewareDecorator.async = functionMiddlewareDecoratorFactory(AsyncFunctionMiddleware);
+functionMiddlewareDecorator.promised = functionMiddlewareDecoratorFactory(PromisedFunctionMiddleware);
 
 module.exports = functionMiddlewareDecorator;
