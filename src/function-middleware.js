@@ -17,8 +17,12 @@ export default class FunctionMiddleware {
         this._middlewares.push(middleware);
     }
 
+    _runFWithArgs(...args) {
+        return this._f(...args);
+    }
+
     run(...args) {
-        const fOutput = this._f(...arguments);
+        const fOutput = this._runFWithArgs(...args);
         if (this._middlewares.length === 0) return fOutput;
         return this._digest(this._middlewares.slice(), fOutput)
     }
