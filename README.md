@@ -8,6 +8,34 @@ Decorates functions with middleware super-powers.
 [![Dependency Status](https://david-dm.org/thefabulousdev/middleware-decorator.svg)](https://david-dm.org/thefabulousdev/middleware-decorator)
 [![devDependency Status](https://david-dm.org/thefabulousdev/middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/middleware-decorator#info=devDependencies)
 
+* [Features](#features)
+* [Installation](#installation)
+  + [npm](#npm)
+  + [bower](#bower)
+* [Usage](#usage)
+      * [Prerequisites](#prerequisites)
+    - [Decorate with a synchronous middleware](#decorate-with-a-synchronous-middleware)
+    - [Decorate with an asynchronous middleware](#decorate-with-an-asynchronous-middleware)
+    - [Decorate with a promised middleware](#decorate-with-a-promised-middleware)
+* [API](#api)
+  + [Module](#module)
+    - [(anyFunction) : SynchronousMiddlewareRunner](#anyfunction--synchronousmiddlewarerunner)
+    - [promised(anyFunction) : PromisedMiddlewareRunner](#promisedanyfunction--promisedmiddlewarerunner)
+    - [async(anyFunction) : AsynchronousMiddlewareRunner](#asyncanyfunction--asynchronousmiddlewarerunner)
+  + [SynchronousMiddlewareRunner](#synchronousmiddlewarerunner)
+    - [synchronousMiddlewareRunner.use(synchronousMiddleware: Function)](#synchronousmiddlewarerunnerusesynchronousmiddleware-function)
+    - [synchronousMiddlewareRunner(...args);](#synchronousmiddlewarerunnerargs)
+  + [AsynchronousMiddlewareRunner](#asynchronousmiddlewarerunner)
+    - [asynchronousMiddlewareRunner.use(asynchronousMiddleware: Function)](#asynchronousmiddlewarerunneruseasynchronousmiddleware-function)
+    - [asynchronousMiddlewareRunner(...args).cb(callback: Function);](#asynchronousmiddlewarerunnerargscbcallback-function)
+  + [PromisedMiddlewareRunner](#promisedmiddlewarerunner)
+    - [promisedMiddlewareRunner.use(promisedMiddleware: Function)](#promisedmiddlewarerunnerusepromisedmiddleware-function)
+    - [promisedMiddlewareRunner(...args).then(promiseHandler: Function);](#promisedmiddlewarerunnerargsthenpromisehandler-function)
+* [Contributing](#contributing)
+    - [Clone the repository](#clone-the-repository)
+    - [Install dependencies](#install-dependencies)
+    - [Use npm scripts](#use-npm-scripts)
+
 ## Features
 
 - Synchronous, asynchronous and promised middleware support
@@ -27,9 +55,9 @@ Decorates functions with middleware super-powers.
     bower install middleware-decorator
 ```
 
-## Demo
+## Usage
 
-### Given
+##### Prerequisites
 
 The module has been imported with your favorite loader as `middlewareDecorator` and the following function is available
 
@@ -38,8 +66,6 @@ function getPrice(){
     return 10;
 }
 ```
-
-### Then
 
 #### Decorate with a synchronous middleware
 
