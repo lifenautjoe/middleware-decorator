@@ -1,30 +1,30 @@
-# middleware-runner
+# middleware-decorator
 
-TBD
+Decorates functions with middleware super-powers.
 
-[![Travis build status](http://img.shields.io/travis/thefabulousdev/middleware-runner.svg?style=flat)](https://travis-ci.org/thefabulousdev/middleware-runner)
-[![Code Climate](https://codeclimate.com/github/thefabulousdev/middleware-runner/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/middleware-runner)
-[![Test Coverage](https://codeclimate.com/github/thefabulousdev/middleware-runner/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/middleware-runner)
-[![Dependency Status](https://david-dm.org/thefabulousdev/middleware-runner.svg)](https://david-dm.org/thefabulousdev/middleware-runner)
-[![devDependency Status](https://david-dm.org/thefabulousdev/middleware-runner/dev-status.svg)](https://david-dm.org/thefabulousdev/middleware-runner#info=devDependencies)
+[![Travis build status](http://img.shields.io/travis/thefabulousdev/middleware-decorator.svg?style=flat)](https://travis-ci.org/thefabulousdev/middleware-decorator)
+[![Code Climate](https://codeclimate.com/github/thefabulousdev/middleware-decorator/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/middleware-decorator)
+[![Test Coverage](https://codeclimate.com/github/thefabulousdev/middleware-decorator/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/middleware-decorator)
+[![Dependency Status](https://david-dm.org/thefabulousdev/middleware-decorator.svg)](https://david-dm.org/thefabulousdev/middleware-decorator)
+[![devDependency Status](https://david-dm.org/thefabulousdev/middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/middleware-decorator#info=devDependencies)
 
 ## Features
 
 - Synchronous, asynchronous and promised middleware runners
 - No dependencies
 - UMD Module
-- Tiny
+- Tiny(5KB)
 
 ## Installation
 
 ### npm
 ```sh
-    npm install middleware-runner
+    npm install middleware-decorator
 ```
 
 ### bower
 ```sh
-    bower install middleware-runner
+    bower install middleware-decorator
 ```
 
 ## Demo
@@ -195,7 +195,7 @@ promisedMiddlewareRunner(arg1, arg2).then((middlewareOutput)=>{
 #### Clone the repository
 
 ``` sh
-git clone git@github.com:thefabulousdev/middleware-runner.git
+git clone git@github.com:thefabulousdev/middleware-decorator.git
 ```
 
 
