@@ -8,6 +8,8 @@ Decorates functions with middleware super-powers.
 [![Dependency Status](https://david-dm.org/thefabulousdev/middleware-decorator.svg)](https://david-dm.org/thefabulousdev/middleware-decorator)
 [![devDependency Status](https://david-dm.org/thefabulousdev/middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/middleware-decorator#info=devDependencies)
 
+## Table of contents
+
 * [Features](#features)
 * [Installation](#installation)
   + [npm](#npm)
