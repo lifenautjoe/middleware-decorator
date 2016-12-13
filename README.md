@@ -37,7 +37,7 @@ console.log(getPrice()); // 5
 
 ```
 
-### Decorate with an asynchronous middleware
+#### Decorate with an asynchronous middleware
 
 ```js
 getPrice = functionMiddlewareDecorator.async(getPrice);
@@ -56,7 +56,7 @@ getPrice().cb((price)=>{
 
 ```
 
-### Decorate with a promised middleware
+#### Decorate with a promised middleware
 
 ```js
 getPrice = functionMiddlewareDecorator.promised(getPrice);
