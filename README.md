@@ -14,7 +14,7 @@ Decorates functions with middleware super-powers.
 * [Installation](#installation)
   + [npm](#npm)
   + [bower](#bower)
-* [Usage](#usage)
+* [Sample usage](#sample-usage)
       * [Prerequisites](#prerequisites)
     - [Decorate with a synchronous middleware](#decorate-with-a-synchronous-middleware)
     - [Decorate with an asynchronous middleware](#decorate-with-an-asynchronous-middleware)
@@ -57,7 +57,7 @@ Decorates functions with middleware super-powers.
     bower install middleware-decorator
 ```
 
-## Usage
+## Sample usage
 
 #### Prerequisites
 
