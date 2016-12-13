@@ -278,4 +278,162 @@ describe('functionMiddlewareDecorator', () => {
         });
     });
 
+    describe('#promised(f)', () => {
+        let decoratedFunction;
+        let promisedFunction;
+        let originalPromisedFunctionOutput;
+        beforeEach(() => {
+            originalPromisedFunctionOutput = new Promise((resolve) => {
+                resolve(originalOutput);
+            });
+            promisedFunction = spy(() => {
+                return originalPromisedFunctionOutput;
+            });
+            decoratedFunction = functionMiddlewareDecorator.promised(promisedFunction);
+        });
+
+        describe('#use(middleware)', () => {
+
+            const badMiddlwareErrorMessage = 'middleware:function is required';
+
+            it('should be a function', () => {
+                expect(decoratedFunction.use).to.be.a('function');
+            });
+
+            describe('when no middleware is passed', () => {
+                it('should throw an error', () => {
+                    expect(() => {
+                        decoratedFunction.use();
+                    }).to.throw(badMiddlwareErrorMessage);
+                });
+            });
+
+            describe('when middleware is passed', () => {
+                describe('when middleware is not a function', () => {
+
+                    const invalidMiddlewares = [
+                        1, 'what', false, null
+                    ];
+
+                    it('should throw an error', () => {
+                        invalidMiddlewares.forEach((badMiddleware) => {
+                            expect(() => {
+                                decoratedFunction.use(badMiddleware);
+                            }).to.throw(badMiddlwareErrorMessage);
+                        });
+                    });
+                });
+
+                describe('when middleware is a function', () => {
+                    function validMiddleware() {
+
+                    }
+
+                    it('should add it to the instance middlewares array', () => {
+                        decoratedFunction.use(validMiddleware);
+                        expect(decoratedFunction._middleware._middlewares).to.contain(validMiddleware);
+                    });
+                });
+            })
+        });
+
+        describe('()', () => {
+            it('should forward all arguments to the original function', () => {
+                const args = [123, 'string', false, null];
+                decoratedFunction(...args);
+                expect(promisedFunction.calledOnce).to.be.true;
+                expect(promisedFunction.calledWith(...args)).to.be.true;
+            });
+
+            describe('when no middlewares have been added', () => {
+                it('should return the original function output', () => {
+                    expect(decoratedFunction()).to.equal(originalPromisedFunctionOutput);
+                });
+            });
+
+            describe('when middlewares have been added', () => {
+
+                let middlewares;
+
+                beforeEach(() => {
+                    middlewares = [];
+                    let synchronousMiddleware;
+                    for (let i = 0; i < middlewaresTestCount; i++) {
+                        if (synchronousMiddleware) {
+                            // Synchronous middlewares
+                            middlewares.push((output) => {
+                                output.count--;
+                                return output;
+                            });
+                        } else {
+                            // Promised middlewares
+                            middlewares.push((output) => {
+                                return new Promise((resolve) => {
+                                    output.count--;
+                                    resolve(output);
+                                });
+                            });
+                        }
+                        synchronousMiddleware = !synchronousMiddleware;
+                    }
+                });
+
+                it('should pass the original output through all of the middlewares (promised and synchronous) while making the output of one the input for the next one', (done) => {
+                    middlewares.forEach((middleware) => {
+                        decoratedFunction.use(middleware);
+                    });
+                    decoratedFunction().then((output) => {
+                        expect(output).to.equal(originalOutput);
+                        expect(output.count).to.equal(0);
+                        done();
+                    });
+                });
+
+                describe('when the function rejects with an error', () => {
+                    let decoratedFunction;
+                    let rejectedPromisedFunction;
+                    let promiseError;
+                    beforeEach(() => {
+                        promiseError = new Error('Some other error');
+                        rejectedPromisedFunction = spy(() => {
+                            return new Promise((resolve, reject) => {
+                                debugger;
+                                reject(promiseError);
+                            });
+                        });
+                        decoratedFunction = functionMiddlewareDecorator.promised(rejectedPromisedFunction);
+                    });
+
+                    it('should reject with the same error', (done) => {
+                        debugger;
+                        middlewares.forEach((middleware) => {
+                            decoratedFunction.use(middleware);
+                        });
+                        decoratedFunction().catch((err) => {
+                            expect(err).to.equal(promiseError);
+                            done();
+                        });
+                    });
+                });
+
+                describe('when a promised middleware throws an error', () => {
+                    it('should reject with the thrown error', (done) => {
+                        const error = new Error('Some error');
+                        middlewares.unshift(() => {
+                            throw error;
+                        });
+                        middlewares.forEach((middleware) => {
+                            decoratedFunction.use(middleware);
+                        });
+                        decoratedFunction().catch((err) => {
+                            expect(err).to.equal(error);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+
 });
