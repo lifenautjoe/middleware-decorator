@@ -10,13 +10,21 @@ Decorates functions with middleware functionality
 
 ## Demo
 
-Given that the module has been imported with your favorite loader as `functionMiddlewareDecorator`
+### Given
+
+The module has been imported with your favorite loader as `functionMiddlewareDecorator` and the following function is available
 
 ```js
 function getPrice(){
     return 10;
 }
+```
 
+### Then
+
+#### Decorate with a synchronous middleware
+
+```js
 getPrice = functionMiddlewareDecorator(getPrice);
 
 function halfPriceMiddleware(price){
@@ -25,7 +33,46 @@ function halfPriceMiddleware(price){
 
 getPrice.use(halfPriceMiddleware);
 
-getPrice(); // 5
+console.log(getPrice()); // 5
+
+```
+
+### Decorate with an asynchronous middleware
+
+```js
+getPrice = functionMiddlewareDecorator.async(getPrice);
+
+function halfPriceMiddleware(price, done){
+    setTimeout(()=>{
+        done(price / 2);
+    }, 2000);
+}
+
+getPrice.use(halfPriceMiddleware);
+
+getPrice().cb((price)=>{
+    console.log(price()); // 5
+});
+
+```
+
+### Decorate with a promised middleware
+
+```js
+getPrice = functionMiddlewareDecorator.promised(getPrice);
+
+// Can return any value, if it's a promise, next middleware won't get executed till resolved
+function halfPriceMiddleware(price){
+    return hasHalfPriceDiscount().then((hasHalfPriceDiscount)=>{
+        return hasHalfPriceDiscount ? price / 2 : price;
+    });
+}
+
+getPrice.use(halfPriceMiddleware);
+
+getPrice().then((price)=>{
+    console.log(price()); // 5
+});
 
 ```
 
