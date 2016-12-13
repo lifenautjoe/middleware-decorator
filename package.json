@@ -1,6 +1,6 @@
 {
   "name": "middleware-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decorates functions with middleware super-powers",
   "main": "dist/middleware-decorator.js",
   "scripts": {
