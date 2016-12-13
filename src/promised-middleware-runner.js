@@ -2,9 +2,9 @@
  * Created on 11/12/16.
  * @author Joel Hernandez <joel.hernandez@kpn.com>
  */
-import FunctionMiddleware from './function-middleware';
+import FunctionMiddleware from './synchronous-middleware-runner';
 
-export default class PromisedFunctionMiddleware extends FunctionMiddleware {
+export default class PromisedMiddlewareRunner extends FunctionMiddleware {
 
     /**
      * Checks if the given value is a promise
