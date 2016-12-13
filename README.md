@@ -1,12 +1,31 @@
 # function-middleware-decorator
 
-Decorates functions with middleware functionality
+Decorates functions with middleware functionality.
 
 [![Travis build status](http://img.shields.io/travis/thefabulousdev/function-middleware-decorator.svg?style=flat)](https://travis-ci.org/thefabulousdev/function-middleware-decorator)
 [![Code Climate](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator)
 [![Test Coverage](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator)
 [![Dependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator)
 [![devDependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator#info=devDependencies)
+
+## Features
+
+- Synchronous, asynchronous and promised middleware runners
+- No dependencies
+- UMD Module
+- Tiny
+
+## Installation
+
+### npm
+```sh
+    npm install function-middleware-decorator
+```
+
+### bower
+```sh
+    bower install function-middleware-decorator
+```
 
 ## Demo
 
@@ -76,46 +95,99 @@ getPrice().then((price)=>{
 
 ```
 
-## Installation
-
-### npm
-```sh
-    npm install function-middleware-decorator
-```
-
-### bower
-```sh
-    bower install function-middleware-decorator
-```
-
-
 ## API
 
-### (originalFunction: Function) : Function
+### Module
 
-Takes a function as argument and returns it's decorated version
+#### (originalFunction: Function) : SynchronousMiddlewareRunner
+
+Takes a function as argument and returns a synchronous middleware runner
 
 ```js
-decoratedFunction = functionMiddlewareDecorator(originalFunction);
+synchronousMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
 ```
 
-### decoratedFunction.use(middleware: Function)
 
-Adds a middleware to the decorated function
+#### promised(originalFunction: Function) : PromisedMiddlewareRunner
+
+Takes a function as argument and returns a promised middleware runner
 
 ```js
-decoratedFunction.use((originalFunctionOutput) => {
-    console.log(`I'm a middleware!`);
-    return originalFunctionOutput;
+promisedMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
+```
+
+#### async(originalFunction: Function) : AsynchronousMiddlewareRunner
+
+Takes a function as argument and returns an asynchronous middleware runner
+
+```js
+asynchronousMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
+```
+
+### synchronousMiddlewareRunner
+
+#### synchronousMiddlewareRunner.use(synchronousMiddleware: Function)
+
+Adds a synchronous middleware
+
+```js
+synchronousMiddlewareRunner.use((middlewareOutput) => {
+    return middlewareOutput;
 });
 ```
 
-### decoratedFunction(...args);
+#### synchronousMiddlewareRunner(...args);
 
-Calls the original function with the given arguments and runs it's output through the registered middleware
+Calls the original function with the given arguments and runs it's output through the registered synchronous middleware
 
 ```js
-decoratedFunction(arg1, arg2);
+synchronousMiddlewareRunner(arg1, arg2);
+```
+
+### asynchronousMiddlewareRunner
+
+#### asynchronousMiddlewareRunner.use(asynchronousMiddleware: Function)
+
+Adds an asynchronous middleware
+
+```js
+asynchronousMiddlewareRunner.use((middlewareOutput, done) => {
+    done(middlewareOutput);
+});
+```
+
+#### asynchronousMiddlewareRunner(...args).cb(callback: Function);
+
+Calls the original function with the given arguments and runs it's output through the registered middleware, when done, calls the provided callback
+
+```js
+asynchronousMiddlewareRunner(arg1, arg2).cb((middlewareOutput)=>{
+    console.log(`Done with ${middlewareOutput}`);
+});
+```
+
+### promisedMiddlewareRunner
+
+#### promisedMiddlewareRunner.use(promisedMiddleware: Function)
+
+Adds a promised middleware
+
+```js
+promisedMiddlewareRunner.use((middlewareOutput) => {
+    return new Promise((resolve, reject) => {
+        resolve(middlewareOutput);
+    });
+});
+```
+
+#### promisedMiddlewareRunner(...args).then(promiseHandler: Function);
+
+Calls the original function with the given arguments and runs it's output through the registered middleware, when done, calls the provided callback
+
+```js
+promisedMiddlewareRunner(arg1, arg2).then((middlewareOutput)=>{
+    console.log(`Done with ${middlewareOutput}`);
+});
 ```
 
 ## Contributing
