@@ -1,8 +1,8 @@
-import functionMiddlewareDecorator from '../../src';
+import middlewareRunner from '../../src';
 
 const expect = chai.expect;
 
-describe('functionMiddlewareDecorator', () => {
+describe('middlewareRunner', () => {
 
     const middlewaresTestCount = 10;
     let originalOutput;
@@ -22,7 +22,7 @@ describe('functionMiddlewareDecorator', () => {
         let decoratedFunction;
 
         beforeEach(() => {
-            decoratedFunction = functionMiddlewareDecorator(originalFunction);
+            decoratedFunction = middlewareRunner(originalFunction);
         });
 
         describe('#use', () => {
@@ -116,7 +116,7 @@ describe('functionMiddlewareDecorator', () => {
         let decoratedFunction;
 
         beforeEach(() => {
-            decoratedFunction = functionMiddlewareDecorator.async(originalFunction);
+            decoratedFunction = middlewareRunner.async(originalFunction);
         });
 
         describe('#use(middleware)', () => {
@@ -289,7 +289,7 @@ describe('functionMiddlewareDecorator', () => {
             promisedFunction = spy(() => {
                 return originalPromisedFunctionOutput;
             });
-            decoratedFunction = functionMiddlewareDecorator.promised(promisedFunction);
+            decoratedFunction = middlewareRunner.promised(promisedFunction);
         });
 
         describe('#use(middleware)', () => {
@@ -400,7 +400,7 @@ describe('functionMiddlewareDecorator', () => {
                                 reject(promiseError);
                             });
                         });
-                        decoratedFunction = functionMiddlewareDecorator.promised(rejectedPromisedFunction);
+                        decoratedFunction = middlewareRunner.promised(rejectedPromisedFunction);
                     });
 
                     it('should reject with the same error', (done) => {

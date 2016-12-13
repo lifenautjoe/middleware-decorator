@@ -1,7 +1,7 @@
 {
-  "name": "function-middleware-decorator",
-  "description": "Decorates functions with middleware functionality",
-  "main": "dist/function-middleware-decorator.js",
+  "name": "middleware-runner",
+  "description": "Creates middleware runners from any function",
+  "main": "dist/middleware-runner.js",
   "authors": [
     "Joel Hernandez <involvmnt@gmail.com>"
   ],
@@ -10,12 +10,12 @@
     "middleware",
     "decorator",
     "middleware-decorator",
-    "function-middleware-decorator",
+    "middleware-runner",
     "javascript-decorator",
     "javascript",
     "function"
   ],
-  "homepage": "https://github.com/thefabulousdev/function-middleware-decorator",
+  "homepage": "https://github.com/thefabulousdev/middleware-runner",
   "ignore": [
     "**/.*",
     "node_modules",

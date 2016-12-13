@@ -2,9 +2,9 @@
  * Created on 11/12/16.
  * @author Joel Hernandez <joel.hernandez@kpn.com>
  */
-import FunctionMiddleware from './function-middleware';
+import SynchronousMiddlewareRunner from './synchronous-middleware-runner';
 
-export default class AsyncFunctionMiddleware extends FunctionMiddleware {
+export default class AsynchronousMiddlewareRunner extends SynchronousMiddlewareRunner {
 
     _digest(middlewares, input, onDigested) {
         if (middlewares.length === 0) return onDigested(undefined, input);

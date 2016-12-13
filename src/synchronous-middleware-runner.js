@@ -1,4 +1,4 @@
-export default class FunctionMiddleware {
+export default class SynchronousMiddlewareRunner {
 
     constructor(f) {
         this._middlewares = [];

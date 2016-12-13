@@ -3,9 +3,9 @@
  * @author Joel Hernandez <joel.hernandez@kpn.com>
  */
 
-import FunctionMiddleware from './function-middleware';
-import AsyncFunctionMiddleware from './async-function-middleware';
-import PromisedFunctionMiddleware from './promised-function-middleware';
+import SynchronousMiddlewareRunner from './synchronous-middleware-runner';
+import AsynchronousMiddlewareRunner from './asynchronous-middleware-runner';
+import PromisedMiddlewareRunner from './promised-middleware-runner';
 
 /**
  * @typedef {Function} functionMiddleware~use
@@ -21,15 +21,15 @@ import PromisedFunctionMiddleware from './promised-function-middleware';
 /**
  * Generates function middleware decorators with the given middleware
  * @param {Function} middleware
- * @returns {functionMiddlewareDecorator}
+ * @returns {middlewareRunner}
  */
-function functionMiddlewareDecoratorFactory(middleware) {
+function middlewareRunnerFactory(middleware) {
     /**
      * Decorates the given function with middleware functionality
      * @param {Function} f
      * @returns {functionMiddleware}
      */
-    return function functionMiddlewareDecorator(f) {
+    return function middlewareRunner(f) {
         function decoratedF() {
             return decoratedF._middleware.run(...arguments);
         }
@@ -44,8 +44,8 @@ function functionMiddlewareDecoratorFactory(middleware) {
     }
 }
 
-const functionMiddlewareDecorator = functionMiddlewareDecoratorFactory(FunctionMiddleware);
-functionMiddlewareDecorator.async = functionMiddlewareDecoratorFactory(AsyncFunctionMiddleware);
-functionMiddlewareDecorator.promised = functionMiddlewareDecoratorFactory(PromisedFunctionMiddleware);
+const middlewareRunner = middlewareRunnerFactory(SynchronousMiddlewareRunner);
+middlewareRunner.async = middlewareRunnerFactory(AsynchronousMiddlewareRunner);
+middlewareRunner.promised = middlewareRunnerFactory(PromisedMiddlewareRunner);
 
-module.exports = functionMiddlewareDecorator;
+module.exports = middlewareRunner;

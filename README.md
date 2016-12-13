@@ -1,12 +1,12 @@
-# function-middleware-decorator
+# middleware-runner
 
-Decorates functions with middleware functionality.
+TBD
 
-[![Travis build status](http://img.shields.io/travis/thefabulousdev/function-middleware-decorator.svg?style=flat)](https://travis-ci.org/thefabulousdev/function-middleware-decorator)
-[![Code Climate](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator)
-[![Test Coverage](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/function-middleware-decorator)
-[![Dependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator)
-[![devDependency Status](https://david-dm.org/thefabulousdev/function-middleware-decorator/dev-status.svg)](https://david-dm.org/thefabulousdev/function-middleware-decorator#info=devDependencies)
+[![Travis build status](http://img.shields.io/travis/thefabulousdev/middleware-runner.svg?style=flat)](https://travis-ci.org/thefabulousdev/middleware-runner)
+[![Code Climate](https://codeclimate.com/github/thefabulousdev/middleware-runner/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/middleware-runner)
+[![Test Coverage](https://codeclimate.com/github/thefabulousdev/middleware-runner/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/middleware-runner)
+[![Dependency Status](https://david-dm.org/thefabulousdev/middleware-runner.svg)](https://david-dm.org/thefabulousdev/middleware-runner)
+[![devDependency Status](https://david-dm.org/thefabulousdev/middleware-runner/dev-status.svg)](https://david-dm.org/thefabulousdev/middleware-runner#info=devDependencies)
 
 ## Features
 
@@ -19,19 +19,19 @@ Decorates functions with middleware functionality.
 
 ### npm
 ```sh
-    npm install function-middleware-decorator
+    npm install middleware-runner
 ```
 
 ### bower
 ```sh
-    bower install function-middleware-decorator
+    bower install middleware-runner
 ```
 
 ## Demo
 
 ### Given
 
-The module has been imported with your favorite loader as `functionMiddlewareDecorator` and the following function is available
+The module has been imported with your favorite loader as `middlewareRunner` and the following function is available
 
 ```js
 function getPrice(){
@@ -44,7 +44,7 @@ function getPrice(){
 #### Decorate with a synchronous middleware
 
 ```js
-getPrice = functionMiddlewareDecorator(getPrice);
+getPrice = middlewareRunner(getPrice);
 
 function halfPriceMiddleware(price){
     return price / 2;
@@ -59,7 +59,7 @@ console.log(getPrice()); // 5
 #### Decorate with an asynchronous middleware
 
 ```js
-getPrice = functionMiddlewareDecorator.async(getPrice);
+getPrice = middlewareRunner.async(getPrice);
 
 function halfPriceMiddleware(price, done){
     setTimeout(()=>{
@@ -78,7 +78,7 @@ getPrice().cb((price)=>{
 #### Decorate with a promised middleware
 
 ```js
-getPrice = functionMiddlewareDecorator.promised(getPrice);
+getPrice = middlewareRunner.promised(getPrice);
 
 // Can return any value, if it's a promise, next middleware won't get executed till resolved
 function halfPriceMiddleware(price){
@@ -104,7 +104,7 @@ getPrice().then((price)=>{
 Takes a function as argument and returns a synchronous middleware runner
 
 ```js
-synchronousMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
+synchronousMiddlewareRunner = middlewareRunner(originalFunction);
 ```
 
 
@@ -113,7 +113,7 @@ synchronousMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
 Takes a function as argument and returns a promised middleware runner
 
 ```js
-promisedMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
+promisedMiddlewareRunner = middlewareRunner(originalFunction);
 ```
 
 #### async(originalFunction: Function) : AsynchronousMiddlewareRunner
@@ -121,7 +121,7 @@ promisedMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
 Takes a function as argument and returns an asynchronous middleware runner
 
 ```js
-asynchronousMiddlewareRunner = functionMiddlewareDecorator(originalFunction);
+asynchronousMiddlewareRunner = middlewareRunner(originalFunction);
 ```
 
 ### synchronousMiddlewareRunner
@@ -195,7 +195,7 @@ promisedMiddlewareRunner(arg1, arg2).then((middlewareOutput)=>{
 #### Clone the repository
 
 ``` sh
-git clone git@github.com:thefabulousdev/function-middleware-decorator.git
+git clone git@github.com:thefabulousdev/middleware-runner.git
 ```
 
 
