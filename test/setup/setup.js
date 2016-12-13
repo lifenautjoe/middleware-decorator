@@ -1,6 +1,9 @@
+import Promise from './promise-polyfill';
+
 module.exports = function (root) {
     root = root ? root : global;
     root.expect = root.chai.expect;
+    root.Promise = Promise;
 
     beforeEach(() => {
         // Using these globally-available Sinon features is preferrable, as they're
