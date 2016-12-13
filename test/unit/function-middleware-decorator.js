@@ -397,7 +397,6 @@ describe('functionMiddlewareDecorator', () => {
                         promiseError = new Error('Some other error');
                         rejectedPromisedFunction = spy(() => {
                             return new Promise((resolve, reject) => {
-                                debugger;
                                 reject(promiseError);
                             });
                         });
@@ -405,7 +404,6 @@ describe('functionMiddlewareDecorator', () => {
                     });
 
                     it('should reject with the same error', (done) => {
-                        debugger;
                         middlewares.forEach((middleware) => {
                             decoratedFunction.use(middleware);
                         });
