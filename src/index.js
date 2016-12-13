@@ -1,6 +1,6 @@
 /**
  * Created on 11/12/16.
- * @author Joel Hernandez <joel.hernandez@kpn.com>
+ * @author Joel Hernandez <involvmnt@gmail.com>
  */
 
 import SynchronousMiddlewareRunner from './synchronous-middleware-runner';
