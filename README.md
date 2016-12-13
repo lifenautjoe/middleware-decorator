@@ -15,7 +15,7 @@ Decorates functions with middleware super-powers.
   + [npm](#npm)
   + [bower](#bower)
 * [Sample usage](#sample-usage)
-      * [Prerequisites](#prerequisites)
+    * [Prerequisites](#prerequisites)
     - [Decorate with a synchronous middleware](#decorate-with-a-synchronous-middleware)
     - [Decorate with an asynchronous middleware](#decorate-with-an-asynchronous-middleware)
     - [Decorate with a promised middleware](#decorate-with-a-promised-middleware)
