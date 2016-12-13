@@ -1,7 +1,7 @@
 {
   "name": "middleware-decorator",
-  "version": "1.0.1",
-  "description": "Creates middleware runners from any function",
+  "version": "1.0.0",
+  "description": "Decorates functions with middleware super-powers",
   "main": "dist/middleware-decorator.js",
   "scripts": {
     "test": "gulp",

@@ -1,6 +1,6 @@
 {
   "name": "middleware-decorator",
-  "description": "Creates middleware runners from any function",
+  "description": "Decorates functions with middleware super-powers",
   "main": "dist/middleware-decorator.js",
   "authors": [
     "Joel Hernandez <involvmnt@gmail.com>"
