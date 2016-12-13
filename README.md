@@ -10,8 +10,8 @@ Decorates functions with middleware super-powers.
 
 ## Features
 
-- Synchronous, asynchronous and promised middleware runners
-- No dependencies
+- Synchronous, asynchronous and promised middleware support
+- Zero dependencies
 - UMD Module
 - Tiny(5KB)
 
@@ -31,7 +31,7 @@ Decorates functions with middleware super-powers.
 
 ### Given
 
-The module has been imported with your favorite loader as `middlewareRunner` and the following function is available
+The module has been imported with your favorite loader as `middlewareDecorator` and the following function is available
 
 ```js
 function getPrice(){
@@ -44,7 +44,7 @@ function getPrice(){
 #### Decorate with a synchronous middleware
 
 ```js
-getPrice = middlewareRunner(getPrice);
+getPrice = middlewareDecorator(getPrice);
 
 function halfPriceMiddleware(price){
     return price / 2;
@@ -59,7 +59,7 @@ console.log(getPrice()); // 5
 #### Decorate with an asynchronous middleware
 
 ```js
-getPrice = middlewareRunner.async(getPrice);
+getPrice = middlewareDecorator.async(getPrice);
 
 function halfPriceMiddleware(price, done){
     setTimeout(()=>{
@@ -78,7 +78,7 @@ getPrice().cb((price)=>{
 #### Decorate with a promised middleware
 
 ```js
-getPrice = middlewareRunner.promised(getPrice);
+getPrice = middlewareDecorator.promised(getPrice);
 
 // Can return any value, if it's a promise, next middleware won't get executed till resolved
 function halfPriceMiddleware(price){
@@ -99,32 +99,32 @@ getPrice().then((price)=>{
 
 ### Module
 
-#### (originalFunction: Function) : SynchronousMiddlewareRunner
+#### (anyFunction) : SynchronousMiddlewareRunner
 
 Takes a function as argument and returns a synchronous middleware runner
 
 ```js
-synchronousMiddlewareRunner = middlewareRunner(originalFunction);
+synchronousMiddlewareRunner = middlewareDecorator(anyFunction);
 ```
 
 
-#### promised(originalFunction: Function) : PromisedMiddlewareRunner
+#### promised(anyFunction) : PromisedMiddlewareRunner
 
 Takes a function as argument and returns a promised middleware runner
 
 ```js
-promisedMiddlewareRunner = middlewareRunner(originalFunction);
+promisedMiddlewareRunner = middlewareDecorator(anyFunction);
 ```
 
-#### async(originalFunction: Function) : AsynchronousMiddlewareRunner
+#### async(anyFunction) : AsynchronousMiddlewareRunner
 
 Takes a function as argument and returns an asynchronous middleware runner
 
 ```js
-asynchronousMiddlewareRunner = middlewareRunner(originalFunction);
+asynchronousMiddlewareRunner = middlewareDecorator(anyFunction);
 ```
 
-### synchronousMiddlewareRunner
+### SynchronousMiddlewareRunner
 
 #### synchronousMiddlewareRunner.use(synchronousMiddleware: Function)
 
@@ -144,7 +144,7 @@ Calls the original function with the given arguments and runs it's output throug
 synchronousMiddlewareRunner(arg1, arg2);
 ```
 
-### asynchronousMiddlewareRunner
+### AsynchronousMiddlewareRunner
 
 #### asynchronousMiddlewareRunner.use(asynchronousMiddleware: Function)
 
@@ -166,7 +166,7 @@ asynchronousMiddlewareRunner(arg1, arg2).cb((middlewareOutput)=>{
 });
 ```
 
-### promisedMiddlewareRunner
+### PromisedMiddlewareRunner
 
 #### promisedMiddlewareRunner.use(promisedMiddleware: Function)
 
