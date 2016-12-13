@@ -1,6 +1,6 @@
 {
   "name": "middleware-decorator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Decorates functions with middleware super-powers",
   "main": "dist/middleware-decorator.js",
   "scripts": {
@@ -15,7 +15,15 @@
     "type": "git",
     "url": "https://github.com/thefabulousdev/middleware-decorator.git"
   },
-  "keywords": [],
+  "keywords": [
+    "middleware",
+    "decorator",
+    "middleware-decorator",
+    "javascript-decorator",
+    "javascript",
+    "function-decorator",
+    "middlewares"
+  ],
   "author": "Joel Hernandez <involvmnt@gmail.com>",
   "license": "MIT",
   "bugs": {
