@@ -59,7 +59,7 @@ Decorates functions with middleware super-powers.
 
 ## Usage
 
-##### Prerequisites
+#### Prerequisites
 
 The module has been imported with your favorite loader as `middlewareDecorator` and the following function is available
 
