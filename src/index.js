@@ -40,6 +40,10 @@ function middlewareDecoratorFactory(middlewareRunner) {
             decoratedF._middleware.use(middleware)
         };
 
+        decoratedF.has = function (middleware) {
+            return decoratedF._middleware.has(middleware);
+        };
+
         return decoratedF;
     }
 }

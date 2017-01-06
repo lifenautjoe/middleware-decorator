@@ -26,12 +26,15 @@ Decorates functions with middleware super-powers.
     - [async(anyFunction) : AsynchronousMiddlewareRunner](#asyncanyfunction--asynchronousmiddlewarerunner)
   + [SynchronousMiddlewareRunner](#synchronousmiddlewarerunner)
     - [synchronousMiddlewareRunner.use(synchronousMiddleware: Function)](#synchronousmiddlewarerunnerusesynchronousmiddleware-function)
+    - [synchronousMiddlewareRunner.has(synchronousMiddleware: Function):boolean](#synchronousmiddlewarerunnerhassynchronousmiddleware-functionboolean)
     - [synchronousMiddlewareRunner(...args);](#synchronousmiddlewarerunnerargs)
   + [AsynchronousMiddlewareRunner](#asynchronousmiddlewarerunner)
     - [asynchronousMiddlewareRunner.use(asynchronousMiddleware: Function)](#asynchronousmiddlewarerunneruseasynchronousmiddleware-function)
+    - [asynchronousMiddlewareRunner.has(asynchronousMiddleware: Function):boolean](#asynchronousmiddlewarerunnerhasasynchronousmiddleware-functionboolean)
     - [asynchronousMiddlewareRunner(...args).cb(callback: Function);](#asynchronousmiddlewarerunnerargscbcallback-function)
   + [PromisedMiddlewareRunner](#promisedmiddlewarerunner)
     - [promisedMiddlewareRunner.use(promisedMiddleware: Function)](#promisedmiddlewarerunnerusepromisedmiddleware-function)
+    - [promisedMiddlewareRunner.has(promisedMiddleware: Function):boolean](#promisedmiddlewarerunnerhaspromisedmiddleware-functionboolean)
     - [promisedMiddlewareRunner(...args).then(promiseHandler: Function);](#promisedmiddlewarerunnerargsthenpromisehandler-function)
 * [Contributing](#contributing)
     - [Clone the repository](#clone-the-repository)
@@ -164,6 +167,14 @@ synchronousMiddlewareRunner.use((middlewareOutput) => {
 });
 ```
 
+#### synchronousMiddlewareRunner.has(synchronousMiddleware: Function):boolean
+
+Checks if has the given middleware
+
+```js
+synchronousMiddlewareRunner.has(aMiddleware); // true || false
+```
+
 #### synchronousMiddlewareRunner(...args);
 
 Calls the original function with the given arguments and runs it's output through the registered synchronous middleware
@@ -182,6 +193,14 @@ Adds an asynchronous middleware
 asynchronousMiddlewareRunner.use((middlewareOutput, done) => {
     done(middlewareOutput);
 });
+```
+
+#### asynchronousMiddlewareRunner.has(asynchronousMiddleware: Function):boolean
+
+Checks if has the given middleware
+
+```js
+asynchronousMiddlewareRunner.has(aMiddleware); // true || false
 ```
 
 #### asynchronousMiddlewareRunner(...args).cb(callback: Function);
@@ -206,6 +225,14 @@ promisedMiddlewareRunner.use((middlewareOutput) => {
         resolve(middlewareOutput);
     });
 });
+```
+
+#### promisedMiddlewareRunner.has(promisedMiddleware: Function):boolean
+
+Checks if has the given middleware
+
+```js
+promisedMiddlewareRunner.has(aMiddleware); // true || false
 ```
 
 #### promisedMiddlewareRunner(...args).then(promiseHandler: Function);
