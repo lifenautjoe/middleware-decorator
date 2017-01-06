@@ -25,6 +25,24 @@ describe('middlewareDecorator', () => {
             decoratedFunction = middlewareDecorator(originalFunction);
         });
 
+        describe('#has', () => {
+
+            function someMiddleware() {
+
+            }
+
+            it('should return true if it has the middleware', () => {
+                decoratedFunction.use(someMiddleware);
+                const hasMiddleware = decoratedFunction.has(someMiddleware);
+                expect(hasMiddleware).to.be.true;
+            });
+
+            it('should return false if it does not have the middleware', () => {
+                const hasMiddleware = decoratedFunction.has(someMiddleware());
+                expect(hasMiddleware).to.be.false;
+            });
+        });
+
         describe('#use', () => {
 
             const badMiddlwareErrorMessage = 'middleware:function is required';
@@ -117,6 +135,24 @@ describe('middlewareDecorator', () => {
 
         beforeEach(() => {
             decoratedFunction = middlewareDecorator.async(originalFunction);
+        });
+
+        describe('#has', () => {
+
+            function someMiddleware() {
+
+            }
+
+            it('should return true if it has the middleware', () => {
+                decoratedFunction.use(someMiddleware);
+                const hasMiddleware = decoratedFunction.has(someMiddleware);
+                expect(hasMiddleware).to.be.true;
+            });
+
+            it('should return false if it does not have the middleware', () => {
+                const hasMiddleware = decoratedFunction.has(someMiddleware());
+                expect(hasMiddleware).to.be.false;
+            });
         });
 
         describe('#use(middleware)', () => {
@@ -290,6 +326,24 @@ describe('middlewareDecorator', () => {
                 return originalPromisedFunctionOutput;
             });
             decoratedFunction = middlewareDecorator.promised(promisedFunction);
+        });
+
+        describe('#has', () => {
+
+            function someMiddleware() {
+
+            }
+
+            it('should return true if it has the middleware', () => {
+                decoratedFunction.use(someMiddleware);
+                const hasMiddleware = decoratedFunction.has(someMiddleware);
+                expect(hasMiddleware).to.be.true;
+            });
+
+            it('should return false if it does not have the middleware', () => {
+                const hasMiddleware = decoratedFunction.has(someMiddleware());
+                expect(hasMiddleware).to.be.false;
+            });
         });
 
         describe('#use(middleware)', () => {

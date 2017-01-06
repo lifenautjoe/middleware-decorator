@@ -17,6 +17,10 @@ export default class SynchronousMiddlewareRunner {
         this._middlewares.push(middleware);
     }
 
+    has(middleware){
+        return this._middlewares.indexOf(middleware) != -1
+    }
+
     _runFWithArgs(...args) {
         return this._f(...args);
     }
