@@ -2,7 +2,7 @@
 
 Decorates functions with middleware super-powers.
 
-[![Travis build status](http://img.shields.io/travis/thefabulousdev/middleware-decorator.svg?style=flat)](https://travis-ci.org/thefabulousdev/middleware-decorator)
+[![Build Status](https://travis-ci.org/lifenautjoe/middleware-decorator.svg?branch=master)](https://travis-ci.org/lifenautjoe/middleware-decorator)
 [![Code Climate](https://codeclimate.com/github/thefabulousdev/middleware-decorator/badges/gpa.svg)](https://codeclimate.com/github/thefabulousdev/middleware-decorator)
 [![Test Coverage](https://codeclimate.com/github/thefabulousdev/middleware-decorator/badges/coverage.svg)](https://codeclimate.com/github/thefabulousdev/middleware-decorator)
 [![Dependency Status](https://david-dm.org/thefabulousdev/middleware-decorator.svg)](https://david-dm.org/thefabulousdev/middleware-decorator)
